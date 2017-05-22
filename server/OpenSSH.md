@@ -117,6 +117,23 @@ Finally, we add the following line to the SSH configuration file:
 AllowGroups sshusers
 ```
 
+## Two-factor authentication
+
+The following methods combine two authentication mechanisms for increased protection.
+
+### SSH key pair + server-side Password
+
+This method verifies the SSH key, and then asks the client to enter the account password. **Important:** This method requires password authentication to be enabled, so, if you disabled it as per the above recommendations, you'll need to change it to `yes` again.
+
+To enable it, add the following line:
+
+```
+AuthenticationMethods publickey,password
+```
+
+### Either SSH keys or passwords + TOTP (also known as Google Authenticator)
+
+Follow the guide [here](https://www.linux.com/blog/securing-ssh-two-factor-authentication-using-google-authenticator).
 # Other settings
 
 ## Timing out
@@ -129,3 +146,8 @@ ClientAliveCountMax 3
 ```
 
 The first setting controls how often the SSH server sends control packets to the client. In this case, every 10 seconds. The second setting controls how many "rounds" the client has to fail to respond before the connection is considered dead and killed, in this case 3, so 3*10 = 30 seconds. This timer only counts for actual broken connections, so for example you can leave a terminal open and running, as long as the SSH server is reachable, the Keep-Alive packets will reach the server and the connection will not be terminated.
+
+# TODO
+
+- Fail2ban
+- Port knocking
