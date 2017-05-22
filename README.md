@@ -1,2 +1,2 @@
 # Configuring-SSH
-An exhaustive configuration guide to SSH clients and servers.
+A configuration guide for SSH clients and servers.
