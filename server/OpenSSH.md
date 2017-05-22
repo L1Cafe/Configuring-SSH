@@ -52,6 +52,16 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,h
 KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1
 ```
 
+To fetch the supported algorithms for a particular OpenSSH version, issue the following commands:
+
+```
+$ ssh -Q cipher
+$ ssh -Q cipher-auth
+$ ssh -Q mac
+$ ssh -Q kex
+$ ssh -Q key
+```
+
 ## Password authentication
 
 Since passwords can be sniffed from a keyboard input or brute-forced, I recommend you disable password authentication **(REMEMBER TO SET UP AN SSH KEY OR YOU WILL BE LOCKED OUT OF THE SYSTEM)**. To do so change the line from `yes` to `no`, as follows:
@@ -118,7 +128,7 @@ Finally, we add the following line to the SSH configuration file:
 AllowGroups sshusers
 ```
 
-## Two-factor authentication
+## Two-factor authentication (optional)
 
 The following methods combine two authentication mechanisms for increased protection.
 
@@ -135,6 +145,15 @@ AuthenticationMethods publickey,password
 ### Either SSH keys or passwords + TOTP (also known as Google Authenticator)
 
 Follow the guide [here](https://www.linux.com/blog/securing-ssh-two-factor-authentication-using-google-authenticator).
+
+## Privilege separation
+
+This will use kernel sandbox mechanism where possible in unprivileged processes. To do so, add the following line.
+
+```
+UsePrivilegeSeparation sandbox
+```
+
 # Other settings
 
 ## Timing out
