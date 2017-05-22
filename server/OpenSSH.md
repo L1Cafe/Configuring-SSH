@@ -1,4 +1,3 @@
-# Security
 (Note: This document only lists the CHANGES that need to be performed in a typical default OpenSSH server installation, like Arch Linux, CentOS 7, Ubuntu 17.04, etc. May also apply to older releases: OpenSSH hasn't changed that much in the last years regarding its default configuration file).
 
 The configuration file can be typically found at `/etc/ssh/sshd_config`.
@@ -8,6 +7,8 @@ Be advised that any change in the SSH settings of your servers might cause probl
 All commands are preceded by the character `$` to make a distinction from lines on the configuration file.
 
 Almost all settings here will require a restart of the SSH daemon. To do so in Linux distributions running systemd, you can issue the command `$ systemctl restart sshd`. Otherwise, consult your distribution's documentation.
+
+# Security
 
 ## Port
 
