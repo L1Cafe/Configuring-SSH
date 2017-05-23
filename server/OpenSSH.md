@@ -1,10 +1,6 @@
-(Note: This document only lists the CHANGES that need to be performed in a typical default OpenSSH server installation, like Arch Linux, CentOS 7, Ubuntu 17.04, etc. May also apply to older releases: OpenSSH hasn't changed that much in the last years regarding its default configuration file).
-
 The configuration file can be typically found at `/etc/ssh/sshd_config`.
 
 Be advised that any change in the SSH settings of your servers might cause problems connecting to the server, so every time you change any settings, make sure you have a second open connection to the server. OpenSSH will apply these settings for all new connections, but connections made before the configuration change will persist, which will allow you to revert changes in case something doesn't work correctly.
-
-All commands are preceded by the character `$` to make a distinction from lines on the configuration file.
 
 Almost all settings here will require a restart of the SSH daemon. To do so in Linux distributions running systemd, you can issue the command `$ systemctl restart sshd`. Otherwise, consult your distribution's documentation.
 
@@ -171,3 +167,4 @@ The first setting controls how often the SSH server sends control packets to the
 
 - Fail2ban
 - Port knocking
+- Explain TOTP
