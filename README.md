@@ -9,6 +9,6 @@ All commands are preceded by the character `$` to make a distinction from lines 
 
 - [OpenSSH](server/OpenSSH.md)
 
-## [Client](client/README.md
+## [Client](client/README.md)
 
 - [OpenSSH](client/OpenSSH.md)
