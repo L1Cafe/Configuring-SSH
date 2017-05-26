@@ -26,9 +26,7 @@ To generate a new RSA key:
 ssh-keygen -t rsa -b 4096
 ```
 
-Where "RSA key for xyz" you can place any comment.
-
-Beyond 4096 there's no real increase in security, but there is an increase in computation.
+Beyond 4096 there's no real increase in security, but there is an increase in computation time.
 
 To generate a new ED25519 key:
 
