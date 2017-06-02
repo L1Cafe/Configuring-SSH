@@ -4,6 +4,8 @@ Be advised that any change in the SSH settings of your servers might cause probl
 
 Almost all settings here will require a restart of the SSH daemon. To do so in Linux distributions running systemd, you can issue the command `$ systemctl restart sshd`. Otherwise, consult your distribution's documentation.
 
+Based on the suggestions below, there is a sample SSHd configuration file. This is only a suggestion and should not be copied directly, but used as a resource to writing your own one.
+
 # Security
 
 ## Port
@@ -17,7 +19,7 @@ Port 666
 
 ## Encryption
 
-OpenSSH ships by default with RSA, DSA, ECDSA and ED25519 keys. Because DSA is not considered a good option and ECDSA is an NSA implementation, the best choice is to only allow ED25519 keys. This does come with a drawback, though. Some SSH clients don't yet support ED25519, but a 4096 RSA bit key should suffice, so, to disable only DSA and ECDSA and leave RSA for backwards compatibility purposes, comment the respective lines, like this:
+OpenSSH ships by default with RSA, DSA, ECDSA and ED25519 keys. Because DSA is not considered a good option and ECDSA is an NSA implementation, the best choice is to only allow ED25519 keys. This does come with a drawback, though. Some SSH clients don't yet support ED25519, but a 4096 RSA bit key should suffice, so, to disable only DSA and ECDSA and leave RSA for backwards compatibility purposes, comment (or delete) the respective lines, like this:
 
 ```
 HostKey /etc/ssh/ssh_host_rsa_key
@@ -75,6 +77,14 @@ PermitRootLogin no
 ```
 
 (Note: There are other options, apart from `no` for this setting. `yes` simply allows root to log-in. `without-password` means users will only be able to log-in to the local root account through means other than passwords, like SSH key file authentication. `forced-commands-only` enables root only when a command has been specified. This might be useful for backups, even if root login is not allowed otherwise).
+
+## X11 Forwarding
+
+For headless servers (machines without a display attached) which are not expected to be used directly, there is no graphical server running (X11, X.org, etc), so we can disable a feature of SSH that allows to connect to machine remotely in graphical mode. For this, we need to add the line:
+
+```
+X11Forwarding no
+```
 
 ## Max Startups
 
@@ -150,6 +160,14 @@ This will use kernel sandbox mechanism where possible in unprivileged processes.
 UsePrivilegeSeparation sandbox
 ```
 
+## SFTP
+
+In older versions of SSH, there was a separate SFTP server. It's still maintained as the default for retrocompatibility purposes, but the newer alternative is to use `internal-sftp` (as opposed to `/usr/lib/openssh/sftp-server`. To do so, add the line:
+
+```
+Subsystem sftp internal-sftp
+```
+
 # Other settings
 
 ## Timing out
@@ -162,6 +180,14 @@ ClientAliveCountMax 3
 ```
 
 The first setting controls how often the SSH server sends control packets to the client. In this case, every 10 seconds. The second setting controls how many "rounds" the client has to fail to respond before the connection is considered dead and killed, in this case 3, so 3*10 = 30 seconds. This timer only counts for actual broken connections, so for example you can leave a terminal open and running, as long as the SSH server is reachable, the Keep-Alive packets will reach the server and the connection will not be terminated.
+
+## Setting an information banner
+
+We can make SSH display a banner before authentication, this banner can contain a dissuasory message, or legal information. Both unauthorized and authorized users will get this banner. For this, we edit the contents of a text file (the default is /etc/issue/net) and add the following line:
+
+```
+Banner /etc/issue.net
+```
 
 # TODO
 
