@@ -102,6 +102,23 @@ You can play around with values. I find the following values work very well for 
 MaxStartups 2:50:20
 ```
 
+
+## Privilege separation
+
+This will use kernel sandbox mechanism where possible in unprivileged processes. To do so, add the following line.
+
+```
+UsePrivilegeSeparation sandbox
+```
+
+## SFTP
+
+In older versions of SSH, there was a separate SFTP server. It's still maintained as the default for retrocompatibility purposes, but the newer alternative is to use `internal-sftp` (as opposed to `/usr/lib/openssh/sftp-server`. To do so, add the line:
+
+```
+Subsystem sftp internal-sftp
+```
+
 ## Listen Address (optional)
 
 If you have multiple network interfaces, each with its own IP, you might want to listen on a single IP only. For example, to listen on IP 192.168.1.54:
@@ -152,21 +169,6 @@ AuthenticationMethods publickey,password
 
 Follow the guide [here](https://www.linux.com/blog/securing-ssh-two-factor-authentication-using-google-authenticator).
 
-## Privilege separation
-
-This will use kernel sandbox mechanism where possible in unprivileged processes. To do so, add the following line.
-
-```
-UsePrivilegeSeparation sandbox
-```
-
-## SFTP
-
-In older versions of SSH, there was a separate SFTP server. It's still maintained as the default for retrocompatibility purposes, but the newer alternative is to use `internal-sftp` (as opposed to `/usr/lib/openssh/sftp-server`. To do so, add the line:
-
-```
-Subsystem sftp internal-sftp
-```
 
 # Other settings
 
