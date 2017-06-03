@@ -4,7 +4,7 @@ Be advised that any change in the SSH settings of your servers might cause probl
 
 Almost all settings here will require a restart of the SSH daemon. To do so in Linux distributions running systemd, you can issue the command `$ systemctl restart sshd`. Otherwise, consult your distribution's documentation.
 
-Based on the suggestions below, there is a sample SSHd configuration file. This is only a suggestion and should not be copied directly, but used as a resource to writing your own one.
+Based on the suggestions below, there is a sample SSHd configuration file. This is only a suggestion and should not be copied directly, but used as a resource to writing your own one. The file is available [here](sshd_config).
 
 # Security
 
