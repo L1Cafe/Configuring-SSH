@@ -65,3 +65,5 @@ HashKnownHosts yes
 # TODO
 
 - Agent forwarding (https://wiki.mozilla.org/Security/Guidelines/OpenSSH)
+- TREZOR hardware key
+- Kryptonite key
